@@ -270,7 +270,7 @@
             },
             async clearDBClientIps(email) {
                 try {
-                    const msg = await HttpUtil.post(`/panel/inbound/clearClientIps/${email}`);
+                    const msg = await HttpUtil.post(`/xui/inbound/clearClientIps/${email}`);
                     if (!msg.success) {
                         return;
                     }
@@ -286,9 +286,9 @@
                             return inbound && app.hasClientStats(inbound, client.email);
                         }).map(client => ({ inboundId: client.inboundId, email: client.email}));
 
-                    return HttpUtil.postWithModalJson('/panel/inbound/resetGroupClientTraffic', resetRequests, null)
+                    return HttpUtil.postWithModalJson('/xui/inbound/resetGroupClientTraffic', resetRequests, null)
                 } else {
-                    return HttpUtil.postWithModal('/panel/inbound/' + dbInboundId + '/resetClientTraffic/' + client.email)
+                    return HttpUtil.postWithModal('/xui/inbound/' + dbInboundId + '/resetClientTraffic/' + client.email)
                 }
             },
             resetClientTraffic(client, dbInboundId, iconElement) {

@@ -1105,7 +1105,7 @@
                                         id: client.inboundId,
                                         settings: '{"clients": [' + newClient + ']}',
                                     };
-                                    await this.submit(`/panel/inbound/addClient`, data, null);
+                                    await this.submit(`/xui/inbound/addClient`, data, null);
                                 }
                             }
 
@@ -1115,11 +1115,11 @@
                             });
                         }
                     }
-                    await this.submit('/panel/inbound/delGroupClients', deleteRequestData, null, true);
+                    await this.submit('/xui/inbound/delGroupClients', deleteRequestData, null, true);
                 } else {
                     const dbInbound = this.dbInbounds.find(row => row.id === dbInboundId);
                     const clientId = this.getClientId(dbInbound.protocol, currentClient);
-                    await this.submit(`/panel/inbound/${dbInboundId}/delClient/${clientId}`);
+                    await this.submit(`/xui/inbound/${dbInboundId}/delClient/${clientId}`);
                 }
             },
             delClient(dbInboundId, currentClient, confirmation = true) {
@@ -1247,13 +1247,12 @@
             },
             resetClientTrafficHandler(client, dbInboundId, clients = []) {
                 if (clients.length > 0){
-                    const resetRequests = clients
-                        .filter(client => {
-                            const inbound = this.dbInbounds.find(inbound => inbound.id === client.inboundId);
-                            return inbound && this.hasClientStats(inbound, client.email);
-                        }).map(client => ({ inboundId: client.inboundId, email: client.email}));
-
-                    this.submit('/xui/inbound/resetGroupClientTraffic', resetRequests, null, true)
+                    clients.forEach((client) => {
+                        const inbound = this.dbInbounds.find(inbound => inbound.id === client.inboundId)
+                        if(inbound && this.hasClientStats(inbound, client.email)) {
+                           this.submit('/xui/inbound/' + client.inboundId + '/resetClientTraffic/' + client.email)
+                        }
+                    })
                 }else {
                     this.submit('/xui/inbound/' + dbInboundId + '/resetClientTraffic/' + client.email);
                 }
@@ -1415,7 +1414,7 @@
                     value: '',
                     okText: '{{ i18n "pages.inbounds.import" }}',
                     confirm: async (dbInboundText) => {
-                        await this.submit('/panel/inbound/import', {data: dbInboundText}, promptModal);
+                        await this.submit('/xui/inbound/import', {data: dbInboundText}, promptModal);
                     },
                 });
             },
