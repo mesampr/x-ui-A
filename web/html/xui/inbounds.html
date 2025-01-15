@@ -1247,12 +1247,13 @@
             },
             resetClientTrafficHandler(client, dbInboundId, clients = []) {
                 if (clients.length > 0){
-                    clients.forEach((client) => {
-                        const inbound = this.dbInbounds.find(inbound => inbound.id === client.inboundId)
-                        if(inbound && this.hasClientStats(inbound, client.email)) {
-                           this.submit('/xui/inbound/' + client.inboundId + '/resetClientTraffic/' + client.email)
-                        }
-                    })
+                    const resetRequests = clients
+                        .filter(client => {
+                            const inbound = this.dbInbounds.find(inbound => inbound.id === client.inboundId);
+                            return inbound && this.hasClientStats(inbound, client.email);
+                        }).map(client => ({ inboundId: client.inboundId, email: client.email}));
+
+                    this.submit('/xui/inbound/resetGroupClientTraffic', resetRequests, null, true)
                 }else {
                     this.submit('/xui/inbound/' + dbInboundId + '/resetClientTraffic/' + client.email);
                 }
