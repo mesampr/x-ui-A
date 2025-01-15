@@ -257,8 +257,12 @@ func (s *Server) startTask() {
 		s.cron.AddJob("@every 10s", job.NewXrayTrafficJob())
 	}()
 
-	// Sync the client traffic with same SubId every 10 seconds
-    s.cron.AddJob("@every 10s", job.NewClientTrafficSyncJob())
+	isSubEnable, err1 := s.settingService.GetSubEnable()
+	isSubSyncEnable, err2 := s.settingService.GetSubSyncEnable()
+	if err1 == nil && err2 == nil && isSubEnable && isSubSyncEnable {
+		// Sync the client traffic with the same SubId every 10 seconds
+		s.cron.AddJob("@every 10s", job.NewClientTrafficSyncJob())
+	}
 
 	// Make a traffic condition every day, 8:30
 	var entry cron.EntryID

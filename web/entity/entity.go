@@ -37,6 +37,7 @@ type AllSetting struct {
 	TgLang           string `json:"tgLang" form:"tgLang"`
 	TimeLocation     string `json:"timeLocation" form:"timeLocation"`
 	SubEnable        bool   `json:"subEnable" form:"subEnable"`
+	SubSyncEnable    bool   `json:"subSyncEnable" form:"subSyncEnable"`
 	SubListen        string `json:"subListen" form:"subListen"`
 	SubPort          int    `json:"subPort" form:"subPort"`
 	SubPath          string `json:"subPath" form:"subPath"`

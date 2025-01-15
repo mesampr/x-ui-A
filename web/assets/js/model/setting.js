@@ -21,6 +21,7 @@ class AllSetting {
         this.tgCpu = "";
         this.tgLang = "";
         this.subEnable = false;
+        this.subSyncEnable = true;
         this.subListen = "";
         this.subPort = "2096";
         this.subPath = "/sub/";
