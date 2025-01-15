@@ -257,6 +257,9 @@ func (s *Server) startTask() {
 		s.cron.AddJob("@every 10s", job.NewXrayTrafficJob())
 	}()
 
+	// Sync the client traffic with same SubId every 10 seconds
+    s.cron.AddJob("@every 10s", job.NewClientTrafficSyncJob())
+
 	// Make a traffic condition every day, 8:30
 	var entry cron.EntryID
 	isTgbotenabled, err := s.settingService.GetTgbotenabled()
