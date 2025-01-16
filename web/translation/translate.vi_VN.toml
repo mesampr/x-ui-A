@@ -187,6 +187,7 @@
 
 [pages.client]
 "add" = "Thêm máy khách"
+"groupAdd" = "Thêm người dùng đăng ký"
 "edit" = "Chỉnh sửa Máy khách"
 "submitAdd" = "Thêm máy khách"
 "submitEdit" = "Lưu thay đổi"

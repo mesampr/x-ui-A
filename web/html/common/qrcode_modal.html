@@ -16,12 +16,14 @@
             style="width: 100%; height: 100%; display: flex; border-radius: 1rem;">
         </canvas>
     </template>
-    <a-divider>{{ i18n "pages.inbounds.client" }}</a-divider>
-    <template v-for="(row, index) in qrModal.qrcodes">
-        <a-tag color="blue" style="margin: 10px 0; display: block; text-align: center;">[[ row.remark ]]</a-tag>
-        <canvas @click="copyToClipboard('qrCode-'+index, row.link)"
-            :id="'qrCode-'+index"
-            style="width: 100%; height: 100%; display: flex; border-radius: 1rem;"></canvas>
+    <template v-if="!isJustSub">
+        <a-divider>{{ i18n "pages.inbounds.client" }}</a-divider>
+        <template v-for="(row, index) in qrModal.qrcodes">
+            <a-tag color="blue" style="margin: 10px 0; display: block; text-align: center;">[[ row.remark ]]</a-tag>
+            <canvas @click="copyToClipboard('qrCode-'+index, row.link)"
+                :id="'qrCode-'+index"
+                style="width: 100%; height: 100%; display: flex; border-radius: 1rem;"></canvas>
+        </template>
     </template>
 </a-modal>
 
@@ -34,12 +36,14 @@
         qrcodes: [],
         clipboard: null,
         visible: false,
+        isJustSub: false,
         subId: '',
         show: function (title = '', dbInbound, client) {
             this.title = title;
             this.dbInbound = dbInbound;
             this.inbound = dbInbound.toInbound();
             this.client = client;
+            this.isJustSub = isJustSub;
             this.subId = '';
             this.qrcodes = [];
             if (this.inbound.protocol == Protocols.WIREGUARD){
@@ -69,6 +73,9 @@
         el: '#qrcode-modal',
         data: {
             qrModal: qrModal,
+            get isJustSub(){
+                return qrModal.isJustSub
+            }
         },
         methods: {
             copyToClipboard(elementId, content) {

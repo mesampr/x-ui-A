@@ -60,7 +60,7 @@
     </a-badge>
     </a-tooltip>
     [[ client.email ]]
-</template>                                    
+</template>
 <template slot="traffic" slot-scope="text, client">
     <a-popover :overlay-class-name="themeSwitcher.currentTheme">
         <template slot="content" v-if="client.email">
@@ -103,7 +103,7 @@
             </tr>
         </table>
     </a-popover>
-</template>                                    
+</template>
 <template slot="expiryTime" slot-scope="text, client, index">
     <template v-if="client.expiryTime !=0 && client.reset >0">
         <a-popover :overlay-class-name="themeSwitcher.currentTheme">
@@ -248,7 +248,7 @@
                                     <span v-if="client.expiryTime < 0">{{ i18n "pages.client.delayedStart" }}</span>
                                     <span v-else>[[ DateUtil.formatMillis(client._expiryTime) ]]</span>
                                 </template>
-                                <a-tag style="min-width: 50px; border: none;" 
+                                <a-tag style="min-width: 50px; border: none;"
                                     :color="userExpiryColor(app.expireDiff, client, themeSwitcher.isDarkTheme)">
                                     [[ remainedDays(client.expiryTime) ]]
                                 </a-tag>

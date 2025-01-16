@@ -12,6 +12,7 @@
         confirmLoading: false,
         okText: '{{ i18n "confirm" }}',
         isEdit: false,
+        isGroup: false,
         confirm: null,
         inbound: new Inbound(),
         dbInbound: new DBInbound(),
@@ -58,6 +59,9 @@
             },
             get isEdit() {
                 return inModal.isEdit;
+            },
+            get isGroup() {
+                return inModal.isGroup;
             },
             get client() {
                 return inModal.inbound.clients[0];
