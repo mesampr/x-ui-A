@@ -39,7 +39,7 @@
         visible: false,
         isJustSub: false,
         subId: '',
-        show: function (title = '', dbInbound, client) {
+        show: function (title = '', dbInbound, client, isJustSub = false) {
             this.title = title;
             this.dbInbound = dbInbound;
             this.inbound = dbInbound.toInbound();

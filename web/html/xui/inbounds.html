@@ -962,8 +962,8 @@
                     okText: '{{ i18n "pages.client.submitAdd"}}',
                     dbInbounds: this.dbInbounds,
                     confirm: async (clients, dbInboundIds) => {
-                        await this.addGroupClient(clients, dbInboundIds, clientModal).then((res) => {
-                            if(res){
+                        await this.addGroupClient(clients, dbInboundIds, clientModal).then(async (res) => {
+                            if(res && res.success){
                                 this.showQrcode(dbInboundIds[0],clients[0], true)
                             }
                         });
@@ -1039,7 +1039,7 @@
                         settings: '{"clients": [' + clients[index].toString() + ']}',
                     })
                 })
-                await this.submit(`/x-ui/inbound/addGroupClient`, data, modal, true)
+                return await this.submit(`/xui/inbound/addGroupClient`, data, modal, true)
             },
             async updateClient(client, dbInboundId, clientId) {
                 if (Array.isArray(client) && Array.isArray(dbInboundId) && Array.isArray(clientId)){
@@ -1059,7 +1059,7 @@
                         id: dbInboundId,
                         settings: '{"clients": [' + client.toString() + ']}',
                     };
-                    await this.submit(`/x-ui/inbound/updateClient/${clientId}`, data, clientModal);
+                    await this.submit(`/xui/inbound/updateClient/${clientId}`, data, clientModal);
                 }
             },
             resetTraffic(dbInboundId) {
@@ -1241,6 +1241,7 @@
                 if (msg.success) {
                     await this.getDBInbounds();
                 }
+                return msg
             },
             getInboundClients(dbInbound) {
                 return dbInbound.toInbound().clients;
