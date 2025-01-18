@@ -279,6 +279,8 @@
 "subSettings" = "Đăng ký"
 "subEnable" = "Bật dịch vụ"
 "subEnableDesc" = "Tính năng đăng ký với cấu hình riêng"
+"subSyncEnable" = "Bật đồng bộ đăng ký"
+"subSyncEnableDesc" = "Lưu lượng truy cập từ các máy khách có cùng đăng ký sẽ được đồng bộ sau mỗi 10 giây."
 "subListen" = "Listening IP"
 "subListenDesc" = "Mặc định để trống để nghe tất cả các IP"
 "subPort" = "Cổng Đăng ký"
