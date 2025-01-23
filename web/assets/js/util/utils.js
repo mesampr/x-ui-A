@@ -94,7 +94,7 @@ class HttpUtil {
                 },
                 body: JSON.stringify(data),
             };
-            const resp = await fetch(url, requestOptions);
+            const resp = await fetch(basePath + url.replace(/^\/+|\/+$/g, ''), requestOptions);
             const response = await resp.json();
 
             msg = this._respToMsg({data : response});
