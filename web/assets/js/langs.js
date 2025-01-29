@@ -10,16 +10,6 @@ const supportLangs = [
         icon: '🇮🇷',
     },
     {
-        name: '汉语',
-        value: 'zh-Hans',
-        icon: '🇨🇳',
-    },
-    {
-        name: 'Русский',
-        value: 'ru-RU',
-        icon: '🇷🇺',
-    },
-    {
         name: 'Tiếng Việt',
         value: 'vi-VN',
         icon: '🇻🇳',        
