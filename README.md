@@ -163,9 +163,7 @@ docker build -t x-ui .
 ## Languages
 
 - English
-- Chinese
 - Farsi
-- Russian
 - Vietnamese
 
 ## Features
